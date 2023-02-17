@@ -4,6 +4,7 @@ from petals import DistributedBloomForCausalLM
 from tqdm import tqdm
 import json
 from os.path import join, exists
+import subprocess
 
 PATH = 'grade-school-math/grade_school_math/data/test.jsonl'
 EXPERIMENT_RESULTS_FOLDER = 'data'
@@ -80,3 +81,5 @@ for row in tqdm(data[start_position:]):
 
     with open(EXPERIMENT_PATH, 'w') as f:
         json.dump(outputs, f)
+    
+    subprocess.run(['dvc', 'push'])
