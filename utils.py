@@ -1,4 +1,5 @@
 import re
+from constants import OFFSET
 NUMBER_SET = [str(num) for num in range(0, 10)]
 
 def _is_float(s):
@@ -61,13 +62,3 @@ def get_maj(ans_list):
   else:
     c = Counter(ans_list)
     return c.most_common()[0][0]
-
-def get_str_ans(pred):
-  text = pred.split('Q:')[0].split('[eot]')[0].replace('\n', '').strip()
-  if text.rfind(FINAL_ANS) >= 0:
-    pred_ans = text[text.rfind(FINAL_ANS) + len(FINAL_ANS):len(text)].strip()
-    if pred_ans.endswith('.'):
-      pred_ans = pred_ans[:-1]
-    return pred_ans
-  else:
-    return ''

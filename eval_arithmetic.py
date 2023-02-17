@@ -1,6 +1,6 @@
 import json
 import utils
-from constants import EXPERIMENT_PATH
+from constants import EXPERIMENT_PATH, OFFSET, TARGET
 
 with open(EXPERIMENT_PATH, 'r') as f:
   answers = json.loads(f.read())
@@ -9,7 +9,7 @@ correct = 0
 for question, answers_info in answers.items():
   pred_list = []
   for pred in answers_info['model_answer']:
-    pred = pred[2449 + 8 + len(question)+1:]
+    pred = pred[OFFSET + len(question):]
     ans = utils.get_ans(pred)
     if ans:
       pred_list.append(ans)
@@ -17,7 +17,7 @@ for question, answers_info in answers.items():
     continue
   maj_ans = utils.get_maj(pred_list)
   target = answers_info['correct_answer']
-  target = target[target.rfind('#### ')+5:]
+  target = target[target.rfind(TARGET)+len(TARGET):]
   if utils._is_float(target) and utils._is_float(maj_ans):
     if abs(float(target) - float(maj_ans)) <= 1e-5:
       correct += 1
