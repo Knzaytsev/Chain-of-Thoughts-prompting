@@ -1,6 +1,7 @@
 import json
+from constants import EXPERIMENT_PATH
 
-with open('answers.json', 'r') as f:
+with open(EXPERIMENT_PATH, 'r') as f:
     answers = json.loads(f.read())
 
 for question, answers_info in answers.items():
