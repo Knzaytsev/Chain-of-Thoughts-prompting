@@ -16,9 +16,12 @@ def read_json(path: str):
         return json.loads(fh.read())
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print(device)
 
-model = DistributedBloomForCausalLM.from_pretrained("bigscience/bloom-petals", tuning_mode="ptune", pre_seq_len=16).to(device)
+model = DistributedBloomForCausalLM.from_pretrained("bigscience/bloom-petals", tuning_mode="ptune", pre_seq_len=16, request_timeout=1800).to(device)
 tokenizer = BloomTokenizerFast.from_pretrained("bigscience/bloom-petals")
+
+print('model is ready')
 
 data = read_jsonl(PATH)
 
@@ -27,6 +30,8 @@ if exists(EXPERIMENT_PATH):
     outputs = read_json(EXPERIMENT_PATH)
 
 start_position = len(outputs)
+
+print('data is read')
 
 input_prompt = """Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today?
 A: We start with 15 trees. Later we have 21 trees. The difference must be the number of trees they planted. So, they must have planted 21 - 15 = 6 trees. The answer is 6.
@@ -75,4 +80,7 @@ for row in tqdm(data[start_position:]):
     with open(EXPERIMENT_PATH, 'w') as f:
         json.dump(outputs, f)
     
+    subprocess.run(['dvc', 'add', 'data'])
+    subprocess.run(['git', 'commit', 'data.dvc', '-m', '"answers updates"'])
     subprocess.run(['dvc', 'push'])
+    subprocess.run(['git', 'push'])
