@@ -1,7 +1,8 @@
 import json
 import utils
+from constants import EXPERIMENT_PATH
 
-with open('answers.json', 'r') as f:
+with open(EXPERIMENT_PATH, 'r') as f:
   answers = json.loads(f.read())
 
 correct = 0

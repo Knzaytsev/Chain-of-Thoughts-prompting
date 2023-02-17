@@ -5,14 +5,7 @@ from tqdm import tqdm
 import json
 from os.path import join, exists
 import subprocess
-
-PATH = 'grade-school-math/grade_school_math/data/test.jsonl'
-EXPERIMENT_RESULTS_FOLDER = 'data'
-SELF_CONSISTENCY = 'self_consistency'
-GREEDY = 'greedy'
-TASK_PREFIX = '_math.json'
-EXPERIMENT = SELF_CONSISTENCY
-EXPERIMENT_PATH = join(EXPERIMENT_RESULTS_FOLDER, EXPERIMENT + TASK_PREFIX)
+from constants import PATH, EXPERIMENT_PATH, EXPERIMENT, SELF_CONSISTENCY
 
 def read_jsonl(path: str):
     with open(path) as fh:
