@@ -1,6 +1,6 @@
-import torch
-from transformers import BloomTokenizerFast
-from petals import DistributedBloomForCausalLM
+# import torch
+# from transformers import BloomTokenizerFast
+# from petals import DistributedBloomForCausalLM
 from tqdm import tqdm
 import json
 from os.path import exists
@@ -56,7 +56,7 @@ def run_experiment(experiment: str):
                 answers.append(tokenizer.decode(output[0]))
         else:
             output = model.generate(
-                inputs, max_new_tokens=128, temperature=0.9, do_sample=False)
+                inputs, max_new_tokens=128, do_sample=False)
             answers.append(tokenizer.decode(output[0]))
 
         outputs[question] = {'correct_answer': answer, 'model_answer': answers}
