@@ -3,7 +3,7 @@ from transformers import BloomTokenizerFast
 from petals import DistributedBloomForCausalLM
 from tqdm import tqdm
 import json
-from os.path import join, exists
+from os.path import exists
 import subprocess
 from constants import PATH, EXPERIMENT_PATH, EXPERIMENT, SELF_CONSISTENCY
 
