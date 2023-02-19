@@ -1,5 +1,3 @@
-import re
-from constants import OFFSET
 NUMBER_SET = [str(num) for num in range(0, 10)]
 
 def _is_float(s):
