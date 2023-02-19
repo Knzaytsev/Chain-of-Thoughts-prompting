@@ -81,3 +81,17 @@ The total cost was $245.33.
 3. Timo Schick, Jane Dwivedi-Yu, Roberto Dessì, Roberta Raileanu, Maria Lomeli, Luke Zettlemoyer, Nicola Cancedda, Thomas Scialom. Toolformer: Language Models Can Teach Themselves to Use Tools. URL: https://arxiv.org/pdf/2302.04761.pdf.
 
 ## Как запустить код
+1. Ресурсы компьютеры должны соответствовать требованию проекта https://github.com/bigscience-workshop/petals.
+2. Выполнить `sh init.sh`.
+3. Запускать проект с помощью команды python `run.py -t <название задачи> -m <название метода>`.
+   1. Допустимые задачи:
+      1. experiment - запускает эксперимент.
+      2. evaluation - запускает оценку результатов. Можно давать в -m несколько методов через пробел.
+      3. answers - показывает ответы.
+   2. Допустимые названия методов:
+      1. self_consistency - использование метода self-consistency.
+      2. greedy - использование метода greedy decoding.
+
+Например, команда `python run.py -m greedy self_consistency -t evaluation` запустит оценку результатов для greedy decoding и self-consistency методов и выведет таблицу.
+
+Команда `python run.py -m self_consistency -t experiment` запустит выполнение экспериментов для self-consistency метода и каждую генерацию ответов для вопроса сохранит в файл.

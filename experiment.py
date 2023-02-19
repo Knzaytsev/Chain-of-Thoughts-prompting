@@ -1,6 +1,6 @@
-# import torch
-# from transformers import BloomTokenizerFast
-# from petals import DistributedBloomForCausalLM
+import torch
+from transformers import BloomTokenizerFast
+from petals import DistributedBloomForCausalLM
 from tqdm import tqdm
 import json
 from os.path import exists
