@@ -46,8 +46,7 @@ def run_experiment(experiment: str):
         question, answer = row['question'], row['answer']
 
         input_text = input_prompt + '\n\nQ: ' + question + '\nA:'
-        inputs = tokenizer(input_text, return_tensors="pt", )[
-            "input_ids"].to(device)
+        inputs = tokenizer(input_text, return_tensors="pt", )["input_ids"].to(device)
 
         answers = []
         if experiment == SELF_CONSISTENCY:
@@ -62,5 +61,5 @@ def run_experiment(experiment: str):
 
         outputs[question] = {'correct_answer': answer, 'model_answer': answers}
 
-        with open(EXPERIMENT_PATH, 'w') as f:
+        with open(experiment_path, 'w') as f:
             json.dump(outputs, f)

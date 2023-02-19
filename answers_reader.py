@@ -1,7 +1,7 @@
 import json
 from constants import EXPERIMENT_PATH, OFFSET
 
-def print_answers(experiment):
+def print_answers(experiment: str):
     experiment_path = EXPERIMENT_PATH(experiment)
 
     with open(experiment_path, 'r') as f:

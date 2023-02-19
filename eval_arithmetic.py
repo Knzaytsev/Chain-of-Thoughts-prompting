@@ -1,13 +1,9 @@
 import json
 import utils
-from constants import EXPERIMENT_PATH, OFFSET, TARGET
+from constants import EXPERIMENT_PATH, OFFSET, TARGET, SELF_CONSISTENCY, GREEDY
+from texttable import Texttable
 
-def run_eval(experiment: str):
-  experiment_path = EXPERIMENT_PATH(experiment)
-
-  with open(experiment_path, 'r') as f:
-    answers = json.loads(f.read())
-
+def answers_stats(answers):
   correct = 0
   for question, answers_info in answers.items():
     pred_list = []
@@ -28,4 +24,25 @@ def run_eval(experiment: str):
       correct += 1
 
   total = len(answers)
-  print(correct, total, correct/total)
+  return correct, total, round(correct/total, 2)
+
+def run_eval(methods):
+  method_answers = []
+  for method in methods:
+    experiment_path = EXPERIMENT_PATH(method)
+
+    with open(experiment_path, 'r') as f:
+      answers = json.loads(f.read())
+    
+    method_answers.append(answers)
+
+  min_size = min([len(answers) for answers in method_answers])
+
+  table = Texttable()
+  rows = [['', 'correct', 'total', 'accuracy']]
+  for j, answers in enumerate(method_answers):
+    answers = dict(list(answers.items())[:min_size])
+    correct, total, acc = answers_stats(answers)
+    rows.append([methods[j], correct, total, acc])
+  table.add_rows(rows)
+  print(table.draw())
