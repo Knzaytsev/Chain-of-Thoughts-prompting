@@ -1,6 +1,6 @@
 import json
 import utils
-from constants import EXPERIMENT_PATH, OFFSET, TARGET, SELF_CONSISTENCY, GREEDY
+from constants import EXPERIMENT_PATH, OFFSET, TARGET
 from texttable import Texttable
 
 def answers_stats(answers):
