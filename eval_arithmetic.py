@@ -26,7 +26,7 @@ def answers_stats(answers: dict):
   total = len(answers)
   return correct, total, round(correct/total, 2)
 
-def run_eval(methods: list[str]):
+def run_eval(methods: list):
   method_answers = []
   for method in methods:
     experiment_path = EXPERIMENT_PATH(method)
