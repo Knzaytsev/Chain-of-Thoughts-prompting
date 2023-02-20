@@ -3,7 +3,7 @@ import utils
 from constants import EXPERIMENT_PATH, OFFSET, TARGET
 from texttable import Texttable
 
-def answers_stats(answers):
+def answers_stats(answers: dict):
   correct = 0
   for question, answers_info in answers.items():
     pred_list = []
@@ -26,7 +26,7 @@ def answers_stats(answers):
   total = len(answers)
   return correct, total, round(correct/total, 2)
 
-def run_eval(methods):
+def run_eval(methods: list[str]):
   method_answers = []
   for method in methods:
     experiment_path = EXPERIMENT_PATH(method)

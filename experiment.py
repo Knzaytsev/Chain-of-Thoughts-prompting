@@ -41,7 +41,6 @@ def run_experiment(experiment: str):
 
     input_prompt = PROMPT
 
-
     for row in tqdm(data[start_position:]):
         question, answer = row['question'], row['answer']
 
