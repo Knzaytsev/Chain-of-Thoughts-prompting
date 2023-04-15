@@ -1,4 +1,4 @@
-# TLab 2023. NLP - Тестовое задание
+# BLOOM CoT prompting
 
 Репозиторий содержит результаты использования промптов Chain-of-Thoughts с использованием greedy decoding и self-consistency методов на модели BLOOM-176B.
 
